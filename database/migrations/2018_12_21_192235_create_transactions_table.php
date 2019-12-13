@@ -67,5 +67,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::dropIfExists('transactions');
         Schema::dropIfExists('services');
+        Schema::dropIfExists('member_service');
+        Schema::dropIfExists('identities');
     }
 }
