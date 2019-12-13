@@ -10,4 +10,5 @@ composer install --no-dev
 #redis-cli flushdb
 php artisan down
 php artisan horizon:terminate
+php artisan migrate --force
 php artisan up
