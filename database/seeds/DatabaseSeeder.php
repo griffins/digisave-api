@@ -11,6 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        \App\User::create(['email' => 'support@loopy.co.ke', 'email_verified_at' => now(), 'name' => 'System Support', 'country_code' => 'KE', 'phone_number' => '0702123456', 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi']);
     }
 }

@@ -49,7 +49,7 @@ class AuthController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      *
      * @throws ValidationException
@@ -64,7 +64,7 @@ class AuthController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     protected function sendLoginResponse(Request $request)
@@ -72,16 +72,15 @@ class AuthController extends Controller
         $this->clearLoginAttempts($request);
         $details = [
             'token' => auth()->getToken(),
-            'instance_name' => app('tenant')->getDriver()->getName(),
             'expires' => time() + (config('session.lifetime') * 60)];
-        $details = array_merge($details, app('tenant')->getDriver()->getDetails());
+        $details = array_merge($details, auth()->user()->toArray());
         return response()->json($details);
     }
 
     /**
      * Validate the user login request.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     protected function validateLogin(Request $request)
@@ -95,7 +94,7 @@ class AuthController extends Controller
     /**
      * Attempt to log the user into the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function attemptLogin(Request $request)
@@ -106,7 +105,7 @@ class AuthController extends Controller
     /**
      * Get the needed authorization credentials from the request.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     protected function credentials(Request $request)
@@ -131,6 +130,6 @@ class AuthController extends Controller
      */
     public function username()
     {
-        return \request()->has('email') ? 'email' : \request()->has('phone') ? 'phone' : 'username';
+        return 'email';
     }
 }
